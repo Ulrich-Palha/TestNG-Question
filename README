@@ -1,4 +1,4 @@
-I first posted this on StackOverflow  http://stackoverflow.com/questions/8609516/best-way-to-write-testng-tests-where-one-test-depends-on-the-output-of-another, where Cedric suggested I try here and post some code too.
+I first posted this on StackOverflow  http://stackoverflow.com/questions/8609516/best-way-to-write-testng-tests-where-one-test-depends-on-the-output-of-another, where Cedric suggested I post this to the TestNG users group http://groups.google.com/group/testng-users/browse_thread/thread/4cc6d556cc3b6a6c
 
 Summary
 I have several webservices that all return a status code and a XML payload. For each one, I need need to test and verify 
@@ -10,11 +10,11 @@ Other requrements
     2. If Test A fails, then its associated TestB should be skipped
     3. The test report should clearly show the success failure of each TestA/TestB test along with the webservice/property that was being tested
 
-TestA takes its from an DataProvider fed by an XML file.
-TestB requires the output (XML payload) of TestB, so I initially made it depend on it via DependsOnGroups.  However, since that meant that any failure of TestA meant that no TestB would run, I resorted to using a higher priority for TestA.
+TestA takes its input from an DataProvider fed by an XML file.
+TestB requires the output (XML payload) of TestA, so I initially made it depend on it via DependsOnGroups.  However, since that meant that any failure of TestA would skip ALL runs of TestB , I resorted to using a higher priority for TestA.
 
 
 Question:
 Given these requirements, is this the recommended TestNG way to structure this test, or is there a better way.
 
-This code is a greatly simplified version of what I am trying to do.
+The attached code is a greatly simplified version of what I am trying to do.
