@@ -1,17 +1,18 @@
 package testng.question;
 
-import java.util.Iterator;
 
 public class PropertyTestInput {
 
 	private final String xmlPayload;
 	private final TestParameters testParams;
+	private final int testPropertyIndex;
 
 	public PropertyTestInput(final String xmlPayload,
-			final TestParameters testParams) {
+			final TestParameters testParams, final int testPropertyIndex) {
 		super();
 		this.xmlPayload = xmlPayload;
 		this.testParams = testParams;
+		this.testPropertyIndex = testPropertyIndex;
 	}
 
 	public String getXmlPayload() {
@@ -28,14 +29,9 @@ public class PropertyTestInput {
 		builder.append(testParams.getUrl());
 		builder.append(": ");
 
-		for (final Iterator<WebserviceProperty> it = testParams.getProperties()
-				.iterator(); it.hasNext();) {
+		builder.append(testParams.getProperties().get(this.testPropertyIndex)
+				.toString());
 
-			builder.append(it.next().toString());
-			if (it.hasNext()) {
-				builder.append(", ");
-			}
-		}
 		return builder.toString();
 	}
 }

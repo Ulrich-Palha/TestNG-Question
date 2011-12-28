@@ -15,12 +15,16 @@ public class TestWebService {
 	@Test(dataProvider = "getWebServiceUrls", priority = 1)
 	public void testWebserviceStatus(final TestParameters params) {
 		final String xmlPayload = stubWebservice(params.getUrl());
-		final PropertyTestInput input = new PropertyTestInput(xmlPayload,
-				params);
-		// Code to verify status code of webservice would go here
 
-		// add output of test and original test params as input to next test
-		webServiceOutput.add(input);
+		for (int ii = params.getProperties().size() - 1; ii >= 0; ii--) {
+
+			final PropertyTestInput input = new PropertyTestInput(xmlPayload,
+					params, ii);
+			// Code to verify status code of webservice would go here
+
+			// add output of test and original test params as input to next test
+			webServiceOutput.add(input);
+		}
 	}
 
 	@Test(dataProvider = "getPropertyTestInput", priority = 2)
